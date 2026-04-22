@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "C#: Topic_5___Making_a_Class Debug",
+        "name": "C#: Topic_5___Making_a_Class_ Debug",
         "type": "dotnet",
         "request": "launch",
-        "projectPath": "${workspaceFolder}/Topic_5___Making_a_Class.csproj"
+        "projectPath": "${workspaceFolder}/Topic_5___Making_a_Class_.csproj"
       }
     ],
   }

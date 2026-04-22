@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Topic_5___Making_a_Class
 {
@@ -8,7 +9,11 @@ namespace Topic_5___Making_a_Class
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        Screen screen;
+        Rectangle window;
+        List<Texture2D> ghostTextures;
+        Ghost ghost1;
+        Texture2D hauntedBackgroundTexture;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -19,8 +24,10 @@ namespace Topic_5___Making_a_Class
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            window = new Rectangle(0, 0, 800, 600);
             base.Initialize();
+            ghost1 = new Ghost(ghostTextures, new Rectangle(150, 250, 40, 40));
+
         }
 
         protected override void LoadContent()
@@ -28,6 +35,13 @@ namespace Topic_5___Making_a_Class
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            hauntedBackgroundTexture = Content.Load<Texture2D>("Images/haunted-background");
+            ghostTextures = new List<Texture2D>();
+            ghostTextures.Add(Content.Load<Texture2D>("Images/boo-stopped"));
+            for (int i = 1; i <= 8; i++)
+                ghostTextures.Add(Content.Load<Texture2D>("Images/boo-move-" + i));
+
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -45,7 +59,10 @@ namespace Topic_5___Making_a_Class
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(hauntedBackgroundTexture, window, Color.White);
+            ghost1.Draw(_spriteBatch);
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }
