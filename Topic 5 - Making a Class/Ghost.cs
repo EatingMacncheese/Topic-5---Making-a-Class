@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Topic_5___Making_a_Class
 {
@@ -14,7 +15,7 @@ namespace Topic_5___Making_a_Class
         private Vector2 _speed;
         private Rectangle _location;
         private int _textureIndex;
-        
+
 
         private enum Screen
         {
@@ -38,15 +39,21 @@ namespace Topic_5___Making_a_Class
             _location = location;
         }
 
-        
 
-        
-        
-        
+
+
+
+
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_textures[0], _location, Color.White);
         }
+
+        public void Update(MouseState mousetate) 
+        { 
+
+        }
+        
     }
 }

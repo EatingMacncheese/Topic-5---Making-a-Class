@@ -10,6 +10,7 @@ namespace Topic_5___Making_a_Class
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Screen screen;
+        MouseState mouseState;
         Rectangle window;
         List<Texture2D> ghostTextures;
         Ghost ghost1;
@@ -48,7 +49,8 @@ namespace Topic_5___Making_a_Class
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            mouseState = Mouse.GetState();
+            ghost1.Update(mouseState);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
