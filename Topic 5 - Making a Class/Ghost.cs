@@ -15,7 +15,7 @@ namespace Topic_5___Making_a_Class
         private Vector2 _speed;
         private Rectangle _location;
         private int _textureIndex;
-
+        private SpriteEffects _direction;
 
         private enum Screen
         {
@@ -50,10 +50,34 @@ namespace Topic_5___Making_a_Class
             spriteBatch.Draw(_textures[0], _location, Color.White);
         }
 
-        public void Update(MouseState mousetate) 
-        { 
+        public void Update(MouseState mouseState) 
+        {
+            _direction = SpriteEffects.None;
 
+            if (mouseState.X < _location.X)
+            {
+                _direction = SpriteEffects.FlipHorizontally;
+                _speed.X = -1;
+            }
+            else if (mouseState.X > _location.X)
+            {
+                _direction = SpriteEffects.None;
+                _speed.X = 1;
+            }
+
+            if (mouseState.Y < _location.Y)
+            {
+                _direction = SpriteEffects.None;
+                _speed.Y = -1;
+            }
+            else if (mouseState.Y > _location.Y)
+            {
+                _direction = SpriteEffects.None;
+                _speed.X = 1;
+            }
         }
+        
+   
         
     }
 }
