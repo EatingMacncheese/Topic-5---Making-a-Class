@@ -15,6 +15,7 @@ namespace Topic_5___Making_a_Class
         List<Texture2D> ghostTextures;
         Ghost ghost1;
         Texture2D hauntedBackgroundTexture;
+        
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -28,6 +29,7 @@ namespace Topic_5___Making_a_Class
             window = new Rectangle(0, 0, 800, 600);
             base.Initialize();
             ghost1 = new Ghost(ghostTextures, new Rectangle(150, 250, 40, 40));
+            
 
         }
 

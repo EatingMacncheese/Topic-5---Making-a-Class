@@ -16,7 +16,7 @@ namespace Topic_5___Making_a_Class
         private Rectangle _location;
         private int _textureIndex;
         private SpriteEffects _direction;
-
+        private float _animationSpeed, _seconds;
         private enum Screen
         {
             Title,
@@ -48,6 +48,7 @@ namespace Topic_5___Making_a_Class
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_textures[0], _location, Color.White);
+            spriteBatch.Draw(_textures[_textureIndex], _location, null, Color.White, 0f, Vector2.Zero, _direction, 1);
         }
 
         public void Update(MouseState mouseState) 
@@ -73,8 +74,37 @@ namespace Topic_5___Making_a_Class
             else if (mouseState.Y > _location.Y)
             {
                 _direction = SpriteEffects.None;
-                _speed.X = 1;
+                _speed.Y = 1;
             }
+            if (mouseState.LeftButton == ButtonState.Released)
+            {
+                _speed = Vector2.Zero;
+            }
+            if (mouseState.LeftButton == ButtonState.Released)
+            {
+                _speed = Vector2.Zero; // Sets speed to zero if mouse not clicked
+                _textureIndex = 0;
+                _seconds = 0f;
+            }
+            else if (_speed != Vector2.Zero) // Ghost is moving
+            {
+                _seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_seconds > _animationSpeed)
+                {
+                    _seconds = 0;
+                    _textureIndex++;
+                    if (_textureIndex >= _textures.Count)
+                        _textureIndex = 1;
+
+                }
+            }
+            _location.Offset(_speed);
+            _animationSpeed = 0.2f;
+            _seconds = 0;
+            _location.Offset(_speed);
+
+
+
         }
         
    
