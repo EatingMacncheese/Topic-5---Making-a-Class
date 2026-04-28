@@ -39,10 +39,15 @@ namespace Topic_5___Making_a_Class
             _location = location;
         }
 
+        public bool Contains(Point player) 
+        { 
+            return _location.Contains(player);
+        }
 
-
-
-
+        public bool Intersects(Rectangle player) 
+        { 
+            return _location.Intersects(player); 
+        }
 
 
         public void Draw(SpriteBatch spriteBatch)
@@ -51,7 +56,7 @@ namespace Topic_5___Making_a_Class
             spriteBatch.Draw(_textures[_textureIndex], _location, null, Color.White, 0f, Vector2.Zero, _direction, 1);
         }
 
-        public void Update(MouseState mouseState) 
+        public void Update(MouseState mouseState, GameTime gameTime) 
         {
             _direction = SpriteEffects.None;
 

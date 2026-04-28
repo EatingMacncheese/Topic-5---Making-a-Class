@@ -9,6 +9,7 @@ namespace Topic_5___Making_a_Class
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        
         Screen screen;
         MouseState mouseState;
         Rectangle window;
@@ -52,7 +53,7 @@ namespace Topic_5___Making_a_Class
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             mouseState = Mouse.GetState();
-            ghost1.Update(mouseState);
+            ghost1.Update(mouseState, gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -69,5 +70,7 @@ namespace Topic_5___Making_a_Class
             _spriteBatch.End();
             base.Draw(gameTime);
         }
+
+
     }
 }
