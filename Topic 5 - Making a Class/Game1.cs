@@ -9,14 +9,20 @@ namespace Topic_5___Making_a_Class
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        
+        private enum Screen
+        {
+            Title,
+            House,
+            End
+        }
+        KeyboardState keyboardState;
         Screen screen;
         MouseState mouseState;
         Rectangle window;
         List<Texture2D> ghostTextures;
         Ghost ghost1;
-        Texture2D hauntedBackgroundTexture;
-        
+        Texture2D hauntedBackgroundTexture, titleTexture, endTexture;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -42,6 +48,7 @@ namespace Topic_5___Making_a_Class
             hauntedBackgroundTexture = Content.Load<Texture2D>("Images/haunted-background");
             ghostTextures = new List<Texture2D>();
             ghostTextures.Add(Content.Load<Texture2D>("Images/boo-stopped"));
+            titleTexture = Content.Load<Texture2D>("Images/haunted-title");
             for (int i = 1; i <= 8; i++)
                 ghostTextures.Add(Content.Load<Texture2D>("Images/boo-move-" + i));
 
@@ -53,7 +60,21 @@ namespace Topic_5___Making_a_Class
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             mouseState = Mouse.GetState();
+            keyboardState = Keyboard.GetState();
             ghost1.Update(mouseState, gameTime);
+            if (screen == Screen.Title)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                    screen = Screen.House;
+
+            }
+            else if (screen == Screen.House)
+            {
+                ghost1.Update(gameTime, mouseState);
+                if (ghost1.Contains(mouseState.Position))
+                    screen = Screen.End;
+
+            }
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -65,8 +86,18 @@ namespace Topic_5___Making_a_Class
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
+
             _spriteBatch.Draw(hauntedBackgroundTexture, window, Color.White);
             ghost1.Draw(_spriteBatch);
+            if (screen == Screen.Title)
+                _spriteBatch.Draw(titleTexture, window, Color.White);
+            else if (screen == Screen.House)
+            {
+                _spriteBatch.Draw(hauntedBackgroundTexture, window, Color.White);
+                ghost1.Draw(_spriteBatch);
+            }
+            else
+                _spriteBatch.Draw(endTexture, window, Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

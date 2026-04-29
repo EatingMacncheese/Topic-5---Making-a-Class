@@ -17,12 +17,7 @@ namespace Topic_5___Making_a_Class
         private int _textureIndex;
         private SpriteEffects _direction;
         private float _animationSpeed, _seconds;
-        private enum Screen
-        {
-            Title,
-            House,
-            End
-        }
+        
 
         public Rectangle Rect
         {
@@ -73,12 +68,13 @@ namespace Topic_5___Making_a_Class
 
             if (mouseState.Y < _location.Y)
             {
-                _direction = SpriteEffects.None;
+                //_direction = SpriteEffects.None;
+
                 _speed.Y = -1;
             }
             else if (mouseState.Y > _location.Y)
             {
-                _direction = SpriteEffects.None;
+                //_direction = SpriteEffects.None;
                 _speed.Y = 1;
             }
             if (mouseState.LeftButton == ButtonState.Released)
@@ -111,8 +107,6 @@ namespace Topic_5___Making_a_Class
 
 
         }
-        
-   
-        
+
     }
 }
