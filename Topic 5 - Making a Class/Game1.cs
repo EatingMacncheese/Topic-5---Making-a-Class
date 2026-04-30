@@ -49,6 +49,7 @@ namespace Topic_5___Making_a_Class
             ghostTextures = new List<Texture2D>();
             ghostTextures.Add(Content.Load<Texture2D>("Images/boo-stopped"));
             titleTexture = Content.Load<Texture2D>("Images/haunted-title");
+            endTexture = Content.Load<Texture2D>("Images/haunted-end-screen");
             for (int i = 1; i <= 8; i++)
                 ghostTextures.Add(Content.Load<Texture2D>("Images/boo-move-" + i));
 
@@ -70,7 +71,7 @@ namespace Topic_5___Making_a_Class
             }
             else if (screen == Screen.House)
             {
-                ghost1.Update(gameTime, mouseState);
+                ghost1.Update(mouseState, gameTime);
                 if (ghost1.Contains(mouseState.Position))
                     screen = Screen.End;
 
